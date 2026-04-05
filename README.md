@@ -1,23 +1,28 @@
-# Online Shop Management API
+# NNPTUD Backend Skeleton
 
-Backend do an Node.js/Express cho mon Ngon ngu Phat trien Ung dung moi.
+Day la branch `main` chi chua khung backend dung chung cho nhom.
 
-## Tinh nang
+## Main co san
 
-- JWT authentication
-- Role-based authorization (`admin`, `staff`, `customer`)
-- CRUD cho user, role, category, product, cart, order, payment, notification
-- Upload avatar va anh san pham
-- Transaction dat hang bang MongoDB session
-- Socket.IO thong bao realtime
+- express app
+- mongodb config
+- socket bootstrap
+- middleware dung chung
+- mongoose models
+- utility dung chung
+- `transactionService`
+- health route
 
-## Cong nghe
+## Main chua co business module
 
-- Node.js + Express.js
-- MongoDB + Mongoose
-- JWT + bcryptjs
-- Multer
-- Socket.IO
+- chua co auth controller
+- chua co CRUD controller
+- chua co payment module
+- chua co order module
+- chua co notification module
+- chua co route business
+
+Nhung phan tren se duoc tung thanh vien push len branch rieng.
 
 ## Cai dat
 
@@ -26,56 +31,19 @@ npm install
 copy .env.example .env
 ```
 
-## Chay project
+## Chay skeleton
 
 ```bash
 npm run dev
 ```
 
-## Frontend React
+## Test nhanh
 
-Chay frontend rieng trong luc dev:
+- `http://localhost:5000/api/v1/health`
+- `http://localhost:5000/tools/api-playground.html`
 
-```bash
-npm run frontend:dev
-```
+## Huong dan chia branch
 
-Chay ca backend + frontend:
+Xem tai:
 
-```bash
-npm run dev:full
-```
-
-Build frontend:
-
-```bash
-npm run frontend:build
-```
-
-Sau khi build, backend se serve frontend tai:
-
-- `http://localhost:5000/`
-
-Trang test API dang "Postman online":
-
-- Mo `http://localhost:5000/tools/api-playground.html`
-- Chon endpoint mau, sua body JSON va gui request truc tiep
-- API upload file van nen demo bang Postman desktop vi can `form-data`
-
-## Seed du lieu
-
-```bash
-npm run seed
-```
-
-Tai khoan mac dinh:
-
-- `admin@example.com` / `123456`
-- `staff@example.com` / `123456`
-- `customer@example.com` / `123456`
-
-## Luu y transaction
-
-- API dat hang su dung MongoDB transaction khi database chay replica set.
-- Neu MongoDB dang la standalone, endpoint van fallback de demo luong dat hang, va response se tra `meta.transactionMode`.
-- Muon demo transaction dung nghia cho bao cao, nen bat replica set cho MongoDB.
+- `docs/BACKEND_BRANCH_GUIDE.md`
