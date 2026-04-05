@@ -1,0 +1,7 @@
+node_modules
+.env
+uploads
+npm-debug.log*
+*.log
+*.err.log
+AGENT.MD
