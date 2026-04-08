@@ -21,7 +21,7 @@ export default function OrderDetailPage() {
   useEffect(() => {
     const loadDetail = async () => {
       if (!id) {
-        setError('Khong tim thay ma don hang');
+        setError('Không tìm thấy mã đơn hàng');
         setLoading(false);
         return;
       }
@@ -33,7 +33,7 @@ export default function OrderDetailPage() {
         setError('');
       } catch (err) {
         setDetail(null);
-        setError(err instanceof Error ? err.message : 'Khong the tai chi tiet don hang');
+        setError(err instanceof Error ? err.message : 'Không thể tải chi tiết đơn hàng');
       } finally {
         setLoading(false);
       }
@@ -48,7 +48,7 @@ export default function OrderDetailPage() {
       <main className="mx-auto grid max-w-7xl gap-8 px-6 py-12 lg:grid-cols-[1.35fr_0.85fr]">
         {loading ? (
           <div className="rounded-[28px] bg-surface-container-lowest p-8 text-on-surface-variant shadow-xl lg:col-span-2">
-            Dang tai chi tiet don hang...
+            Đang tải chi tiết đơn hàng...
           </div>
         ) : error ? (
           <div className="rounded-[28px] bg-red-50 px-4 py-3 text-red-700 lg:col-span-2">
@@ -56,7 +56,7 @@ export default function OrderDetailPage() {
           </div>
         ) : !detail ? (
           <div className="rounded-[28px] bg-surface-container-lowest p-8 text-on-surface-variant shadow-xl lg:col-span-2">
-            Khong co du lieu don hang.
+            Không có dữ liệu đơn hàng.
           </div>
         ) : (
           <>
@@ -66,9 +66,9 @@ export default function OrderDetailPage() {
                   <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
                     {detail.order.code}
                   </p>
-                  <h1 className="mt-2 text-4xl font-black">Chi tiet don hang</h1>
+                  <h1 className="mt-2 text-4xl font-black">Chi tiết đơn hàng</h1>
                   <p className="mt-2 text-on-surface-variant">
-                    Theo doi thong tin giao hang, thanh toan va cac mon da dat.
+                    Theo dõi thông tin giao hàng, thanh toán và các món đã đặt.
                   </p>
                 </div>
                 <div className="rounded-full bg-orange-100 px-4 py-2 text-sm font-bold text-orange-800">
@@ -78,7 +78,7 @@ export default function OrderDetailPage() {
 
               {!detail.items.length ? (
                 <div className="rounded-3xl border border-dashed border-outline p-6 text-on-surface-variant">
-                  Don hang nay chua co mon nao.
+                  Đơn hàng này chưa có món nào.
                 </div>
               ) : (
                 <div className="space-y-4">
@@ -89,9 +89,9 @@ export default function OrderDetailPage() {
                     >
                       <div className="min-w-0">
                         <strong className="block truncate text-lg">
-                          {item.product?.name || 'San pham da xoa'}
+                          {item.product?.name || 'Sản phẩm đã xóa'}
                         </strong>
-                        <p className="mt-1 text-sm text-on-surface-variant">So luong: {item.quantity}</p>
+                        <p className="mt-1 text-sm text-on-surface-variant">Số lượng: {item.quantity}</p>
                       </div>
                       <strong className="shrink-0 text-lg text-primary">{formatCurrency(item.subtotal)}</strong>
                     </div>
@@ -102,40 +102,40 @@ export default function OrderDetailPage() {
 
             <aside className="space-y-5">
               <section className="rounded-[28px] bg-surface-container-lowest p-8 shadow-xl">
-                <h2 className="mb-5 text-2xl font-black">Thong tin don hang</h2>
+                <h2 className="mb-5 text-2xl font-black">Thông tin đơn hàng</h2>
                 <div className="grid gap-3 text-sm">
-                  <InfoRow label="Trang thai don" value={getOrderStatusLabel(detail.order.status)} />
-                  <InfoRow label="Tong tien" value={formatCurrency(detail.order.totalAmount)} />
-                  <InfoRow label="Thanh toan" value={getPaymentStatusLabel(detail.payment?.status)} />
-                  <InfoRow label="Phuong thuc" value={getPaymentMethodLabel(detail.payment?.method)} />
-                  <InfoRow label="Ngay tao" value={formatDate(detail.order.createdAt)} />
-                  <InfoRow label="Ghi chu" value={detail.order.note?.trim() || '-'} multiline />
+                  <InfoRow label="Trạng thái đơn" value={getOrderStatusLabel(detail.order.status)} />
+                  <InfoRow label="Tổng tiền" value={formatCurrency(detail.order.totalAmount)} />
+                  <InfoRow label="Thanh toán" value={getPaymentStatusLabel(detail.payment?.status)} />
+                  <InfoRow label="Phương thức" value={getPaymentMethodLabel(detail.payment?.method)} />
+                  <InfoRow label="Ngày tạo" value={formatDate(detail.order.createdAt)} />
+                  <InfoRow label="Ghi chú" value={detail.order.note?.trim() || '-'} multiline />
                 </div>
               </section>
 
               <section className="rounded-[28px] bg-surface-container-lowest p-8 shadow-xl">
-                <h2 className="mb-5 text-2xl font-black">Khach hang dat</h2>
+                <h2 className="mb-5 text-2xl font-black">Khách hàng đặt</h2>
                 <div className="grid gap-3 text-sm">
-                  <InfoRow label="Ho ten" value={detail.order.user?.fullName || '-'} />
+                  <InfoRow label="Họ tên" value={detail.order.user?.fullName || '-'} />
                   <InfoRow label="Email" value={detail.order.user?.email || '-'} />
-                  <InfoRow label="Dia chi giao" value={detail.order.shippingAddress || '-'} multiline />
+                  <InfoRow label="Địa chỉ giao" value={detail.order.shippingAddress || '-'} multiline />
                 </div>
               </section>
 
               <section className="rounded-[28px] bg-surface-container-lowest p-8 shadow-xl">
-                <h2 className="mb-5 text-2xl font-black">Dieu huong nhanh</h2>
+                <h2 className="mb-5 text-2xl font-black">Điều hướng nhanh</h2>
                 <div className="flex flex-col gap-3">
                   <Link
                     to="/orders"
                     className="rounded-2xl bg-primary px-6 py-4 text-center font-bold text-on-primary transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/20"
                   >
-                    Quay lai danh sach don
+                    Quay lại danh sách đơn
                   </Link>
                   <Link
                     to="/cart"
                     className="rounded-2xl bg-surface-container-high px-6 py-4 text-center font-bold transition-all hover:bg-surface-container-highest"
                   >
-                    Mo lai gio mon
+                    Mở lại giỏ món
                   </Link>
                 </div>
               </section>

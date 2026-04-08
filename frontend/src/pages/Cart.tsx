@@ -22,7 +22,7 @@ export default function CartPage() {
       setCart(response.data);
       setError('');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Khong the tai gio hang');
+      setError(err instanceof Error ? err.message : 'Không thể tải giỏ hàng');
     } finally {
       setLoading(false);
     }
@@ -41,10 +41,10 @@ export default function CartPage() {
     setBusyItemId(item._id);
     try {
       await updateCartItem(item._id, { quantity });
-      notify('Cap nhat so luong thanh cong', 'success');
+      notify('Cập nhật số lượng thành công', 'success');
       await Promise.all([loadCart(), refreshCartState()]);
     } catch (err) {
-      await showError('Khong the cap nhat', err instanceof Error ? err.message : undefined);
+      await showError('Không thể cập nhật', err instanceof Error ? err.message : undefined);
     } finally {
       setBusyItemId('');
     }
@@ -53,17 +53,17 @@ export default function CartPage() {
   const remove = async (id: string, name?: string) => {
     if (busyItemId) return;
 
-    const confirmed = await confirmDelete(name || 'mon nay');
+    const confirmed = await confirmDelete(name || 'món này');
     if (!confirmed) return;
 
     setBusyItemId(id);
     try {
       await deleteCartItem(id);
-      notify('Da xoa mon khoi gio', 'info');
-      await showSuccess('Da xoa mon');
+      notify('Đã xóa món khỏi giỏ', 'info');
+      await showSuccess('Đã xóa món');
       await Promise.all([loadCart(), refreshCartState()]);
     } catch (err) {
-      await showError('Xoa mon that bai', err instanceof Error ? err.message : undefined);
+      await showError('Xóa món thất bại', err instanceof Error ? err.message : undefined);
     } finally {
       setBusyItemId('');
     }
@@ -76,16 +76,16 @@ export default function CartPage() {
         <section className="rounded-[28px] bg-surface-container-lowest p-8 shadow-xl">
           <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
             <div>
-              <h1 className="text-4xl font-black">Gio mon cua ban</h1>
+              <h1 className="text-4xl font-black">Giỏ món của bạn</h1>
               <p className="mt-2 text-on-surface-variant">
-                Kiem tra lai so luong va tong tien truoc khi chuyen sang buoc dat hang.
+                Kiểm tra lại số lượng và tổng tiền trước khi chuyển sang bước đặt hàng.
               </p>
             </div>
             <Link
               to="/products"
               className="rounded-2xl bg-surface-container-high px-5 py-3 font-bold transition-all hover:bg-surface-container-highest"
             >
-              Chon them mon
+              Chọn thêm món
             </Link>
           </div>
 
@@ -93,13 +93,13 @@ export default function CartPage() {
 
           {loading ? (
             <div className="rounded-3xl border border-dashed border-outline p-8 text-on-surface-variant">
-              Dang tai gio hang...
+              Đang tải giỏ hàng...
             </div>
           ) : !items.length ? (
             <div className="rounded-3xl border border-dashed border-outline p-8 text-center text-on-surface-variant">
-              <p>Chua co mon nao trong gio.</p>
+              <p>Chưa có món nào trong giỏ.</p>
               <Link to="/products" className="mt-3 inline-flex font-bold text-primary">
-                Xem thuc don ngay
+                Xem thực đơn ngay
               </Link>
             </div>
           ) : (
@@ -113,8 +113,8 @@ export default function CartPage() {
                     className="flex flex-col justify-between gap-4 border-b border-surface-variant pb-5 md:flex-row md:items-center"
                   >
                     <div>
-                      <h3 className="text-xl font-bold">{item.product?.name || 'Mon da chon'}</h3>
-                      <p className="text-on-surface-variant">{formatCurrency(item.unitPrice)} moi phan</p>
+                      <h3 className="text-xl font-bold">{item.product?.name || 'Món đã chọn'}</h3>
+                      <p className="text-on-surface-variant">{formatCurrency(item.unitPrice)} mỗi phần</p>
                     </div>
                     <div className="flex flex-wrap items-center gap-3">
                       <button
@@ -141,7 +141,7 @@ export default function CartPage() {
                         onClick={() => void remove(item._id, item.product?.name)}
                         className="cursor-pointer font-semibold text-red-600 hover:underline disabled:cursor-not-allowed disabled:opacity-50"
                       >
-                        {isBusy ? 'Dang xu ly...' : 'Xoa'}
+                        {isBusy ? 'Đang xử lý...' : 'Xóa'}
                       </button>
                     </div>
                   </div>
@@ -152,14 +152,14 @@ export default function CartPage() {
         </section>
 
         <aside className="h-fit rounded-[28px] bg-surface-container-lowest p-8 shadow-xl">
-          <h2 className="mb-4 text-2xl font-black">Tom tat</h2>
+          <h2 className="mb-4 text-2xl font-black">Tóm tắt</h2>
           <div className="space-y-3 rounded-3xl bg-surface-container-low p-5">
             <div className="flex justify-between text-on-surface-variant">
-              <span>So mon trong gio</span>
+              <span>Số món trong giỏ</span>
               <strong>{totalQuantity}</strong>
             </div>
             <div className="flex justify-between text-lg">
-              <span>Tong tien</span>
+              <span>Tổng tiền</span>
               <strong className="text-primary">{formatCurrency(cart?.cart.totalAmount || 0)}</strong>
             </div>
           </div>
@@ -170,7 +170,7 @@ export default function CartPage() {
             onClick={() => navigate('/orders?create=1')}
             className="mt-6 w-full cursor-pointer rounded-2xl bg-primary px-6 py-4 font-bold text-on-primary transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/20 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            Tien hanh dat mon
+            Tiến hành đặt món
           </button>
         </aside>
       </main>
