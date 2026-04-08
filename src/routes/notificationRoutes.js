@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.use(catchAsync(auth));
 router.get("/me", catchAsync(controller.getMyNotifications));
-router.patch("/:id/read", catchAsync(controller.markNotificationAsRead));
+router.put("/:id/read", catchAsync(controller.markNotificationAsRead));
 
 module.exports = router;

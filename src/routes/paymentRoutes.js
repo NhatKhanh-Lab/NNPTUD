@@ -10,6 +10,6 @@ const router = express.Router();
 
 router.use(catchAsync(auth), authorize("admin", "staff"));
 router.get("/", catchAsync(controller.getPayments));
-router.patch("/:id/status", validate(updatePaymentStatusSchema), catchAsync(controller.updatePaymentStatus));
+router.put("/:id/status", validate(updatePaymentStatusSchema), catchAsync(controller.updatePaymentStatus));
 
 module.exports = router;
