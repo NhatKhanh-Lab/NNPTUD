@@ -1,49 +1,89 @@
-# NNPTUD Backend Skeleton
+# NNPTUD Online Shop
 
-Day la branch `main` chi chua khung backend dung chung cho nhom.
+Website quan ly dat mon truc tuyen gom frontend cho khach hang va backend quan tri van hanh cua hang.
 
-## Main co san
+## Chuc nang chinh
 
-- express app
-- mongodb config
-- socket bootstrap
-- middleware dung chung
-- mongoose models
-- utility dung chung
-- `transactionService`
-- health route
+- Dang ky, dang nhap bang JWT
+- Phan quyen `admin`, `staff`, `customer`
+- Quan ly danh muc, san pham, nguoi dung, vai tro
+- Gio hang va quy trinh tao don hang
+- Thanh toan va cap nhat trang thai don
+- Thong bao theo nguoi dung
+- API Playground de test nhanh endpoint
+- Frontend React cho customer va admin dashboard
 
-## Main chua co business module
+## Cong nghe su dung
 
-- chua co auth controller
-- chua co CRUD controller
-- chua co payment module
-- chua co order module
-- chua co notification module
-- chua co route business
+- Backend: Node.js, Express, MongoDB, Mongoose, JWT, Socket.IO
+- Frontend: React, Vite, TypeScript, Tailwind CSS
 
-Nhung phan tren se duoc tung thanh vien push len branch rieng.
+## Cau truc thu muc
+
+- `src/`: backend source code
+- `frontend/`: giao dien React
+- `public/`: tai nguyen static, gom `api-playground.html`
+- `uploads/`: anh san pham va avatar upload
 
 ## Cai dat
 
 ```bash
 npm install
+npm --prefix frontend install
 copy .env.example .env
 ```
 
-## Chay skeleton
+## Chay du an
+
+Chay backend:
 
 ```bash
-npm run dev
+npm start
 ```
 
-## Test nhanh
+Chay frontend:
 
-- `http://localhost:5000/api/v1/health`
-- `http://localhost:5000/tools/api-playground.html`
+```bash
+npm run frontend:dev
+```
 
-## Huong dan chia branch
+Chay dong thoi backend + frontend:
 
-Xem tai:
+```bash
+npm run dev:full
+```
 
-- `docs/BACKEND_BRANCH_GUIDE.md`
+## Seed du lieu
+
+```bash
+npm run seed
+```
+
+Tai khoan mau:
+
+- `admin@example.com` / `123456`
+- `staff@example.com` / `123456`
+- `customer@example.com` / `123456`
+
+## Dia chi mac dinh
+
+- Frontend: `http://localhost:3000`
+- Backend API: `http://localhost:5000/api/v1`
+- Health check: `http://localhost:5000/api/v1/health`
+- API Playground: `http://localhost:5000/tools/api-playground.html`
+
+## Scripts chinh
+
+- `npm start`: chay backend
+- `npm run dev`: chay backend voi watch mode
+- `npm run seed`: seed du lieu mau
+- `npm run frontend:dev`: chay frontend dev server
+- `npm run frontend:build`: build frontend
+- `npm run frontend:preview`: preview frontend sau build
+- `npm run dev:full`: chay backend va frontend cung luc
+
+## Ghi chu
+
+- Frontend va backend dung chung repo.
+- Anh upload duoc phuc vu qua thu muc `uploads/`.
+- Neu can test API nhanh tren trinh duyet, dung `public/api-playground.html`.
