@@ -467,7 +467,7 @@
       },
       {
         name: "Update Order Status",
-        method: "PATCH",
+        method: "PUT",
         path: "/orders/<paste-order-id-here>/status",
         description: "Admin/staff cap nhat order status.\nState hop le: pending -> confirmed|cancelled, confirmed -> shipping|cancelled, shipping -> completed.",
         body: JSON.stringify({ status: "confirmed" }, null, 2)
@@ -481,7 +481,7 @@
       },
       {
         name: "Update Payment Status",
-        method: "PATCH",
+        method: "PUT",
         path: "/payments/<paste-payment-id-here>/status",
         description: "Admin/staff cap nhat payment.\nState hop le: pending -> paid|failed, paid -> refunded.",
         body: JSON.stringify({ status: "paid" }, null, 2)
@@ -495,7 +495,7 @@
       },
       {
         name: "Mark Notification Read",
-        method: "PATCH",
+        method: "PUT",
         path: "/notifications/<paste-notification-id-here>/read",
         description: "Danh dau 1 notification da doc.",
         body: JSON.stringify({}, null, 2)
